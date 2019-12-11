@@ -9,6 +9,6 @@ The table below summerizes the circuits:
 ### OTA1 and OTA2 ###
 OTA1 and OTA2 share the same schematic but different sizing. The circuits are sized by different circuit designers with targeting roughly similar performance.
 <figure align="center">
-  <img src="./../../images/Telescopic_Three_stage.png" width="240" alt>
+  <img src="./../../images/Telescopic_Three_stage.jpg" width="240" alt>
   <figcaption>OTA1 and OTA2</figcaption>
 </figure>
