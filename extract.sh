@@ -1,4 +1,6 @@
 # Extract benchmark 
-tar xvzf ./benchmark/UT-AnLay.tar.gz -C ./benchmark/ --strip 1
+echo "Extracting benchmark..."
+tar xzf ./benchmark/UTAnLay.tar.gz -C ./benchmark/ --strip 1
+rm ./benchmark/*.sp
 
 # Extract placement feature images
