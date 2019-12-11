@@ -1,0 +1,6 @@
+*pyc
+*swp
+benchmark/Core_FF
+benchmark/Core_test_flow
+benchmark/Telescopic_Three_stage
+benchmark/Telescopic_Three_stage_1
