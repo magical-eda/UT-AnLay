@@ -1,11 +1,11 @@
 # Benchmark Overview #
-This folder contains benchmark circuits with performance simulations and placement results. 
+This folder contains benchmark circuits with performance simulations and placement results. \
 Run the script under UT-Anlay to extract the benchmark
 ```
     source extract.sh 
 ```
 ## Designs ##
-More information on the circuits netlist files are under ./Netlists. 
+More information on the circuits netlist files are under ./Netlists. \
 The benchmark currently contains 4 OTA examples:
 - Telescopic_Three_stage
 - Telescopic_Three_stage_1
@@ -13,7 +13,7 @@ The benchmark currently contains 4 OTA examples:
 - Core_test_flow
 
 ## Performance Simulation ##
-More information on the circuits test bench are under ./Simulation. 
+More information on the circuits test bench are under ./Simulation.  \
 With each circuit layout implementation, the netlist first need to be extracted for parasitics and then simulated with the test bench.
 We currently rely on Calibre PEX for layout parasitic extraction:
 https://go.mentor.com/4ii9y
@@ -41,7 +41,7 @@ The Pin indincate the pintype of the device:
 - CMOS: D/G/S/B respectively for drain, gate, source and bulk
 - Resistor and capacitor: PLUS/MINUS/B respectively for plus, minus and bulk. Note that there is no electrical difference between PLUS and MINUS.
 #### place.pin ####
-This file includes all the pin shapes of each implemented device layout.
+This file includes all the pin shapes of each implemented device layout. \
 The pin shapes are currently in the form of rectangles and the coordinate are based on device layout before placement. The final pin shape should also include the offset based on where each device is placed.
 For this current version, each device would consist of multiple pins (bulk shape not included). The format for this file is as follows:
 ```
