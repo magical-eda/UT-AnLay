@@ -4,6 +4,7 @@ This folder contains two json files neede for the feature extraction stage. Our 
 ### Device Type ###
 The .json file contains the device type of the correspoinding devices. This information could be automatically obtained from the circuit netlist. \
 Current supported devices are classified into the following categories: NMOS, PMOS, CAP, RES. Device type information are embedded in the image as intensity:
+
 | Device Type     | NMOS | PMOS | CAP  | RES  |
 |:---------------:|:----:|:----:|:----:|:----:|
 | Image Intensity | 0.25 | 0.50 | 0.75 | 1.00 |
