@@ -89,6 +89,7 @@ class Device(object):
     def __init__(self, name=""):
         self._name = name
         self._device_type = -1
+        self._device_channel = -1
         self._rect = geo.Rect()
         self._pin_list = []
         self._pin_name_map = {}
@@ -96,8 +97,12 @@ class Device(object):
         return self._name
     def set_type(self, device_type):
         self._device_type = device_type
+    def set_channel(self, device_channel):
+        self._device_channel = device_channel
     def device_type(self):
         return self._device_type
+    def device_channel(self):
+        return self._device_channel
     def set_xy_lo(self, x_lo, y_lo):
         self._rect.set_ll(geo.XY(x_lo, y_lo))
     def set_xy_hi(self, x_hi, y_hi):
@@ -131,15 +136,17 @@ class Device(object):
         idx = self._pin_name_map[pin_name]
         return self._pin_list[idx]
     def to_str(self):
-        string = ""
-        string += "Type: "
+        string = self._name 
+        string += "\nType: "
         string += str(self._device_type)
+        string += "\nChannel: "
+        string += str(self._device_channel)
         string += "\nBBOX: "
         string += self._rect.to_str()
         string += "\nPin indices: "
         for pin in self._pin_list:
-            string += str(pin) + " " 
-        return string
+            string += str(pin) 
+        return string + "\n"
 
 class Pin(object):
     def __init__(self):

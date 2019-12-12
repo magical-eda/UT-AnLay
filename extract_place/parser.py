@@ -130,7 +130,19 @@ class Parser(object):
                 else:
                     continue
 
-def main(pfile, ffile, cfile, jfile):
+    def parse_device_channel(self, filename):
+        """
+        @brief read the JSON file for the type of each devices
+        @param the filename for the JSON file
+        """
+        with open(filename) as f:
+            channel = json.load(f)
+            for device_name in channel:
+                device_channel = channel[device_name]
+                device = self._db.device_name(device_name)
+                device.set_channel(device_channel)
+
+def main(pfile, ffile, cfile, jfile, jchan):
     """
     @param pfile: the .pin file
     @param ffile: the .result.final file
@@ -144,11 +156,7 @@ def main(pfile, ffile, cfile, jfile):
     parser.parse_place_result_final(ffile)
     parser.parse_connection(cfile)
     parser.parse_device_type(jfile)
+    parser.parse_device_channel(jchan)
     print(db._circuit.to_str())
     db.initialize()
 
-if __name__ == '__main__':
-    main(pfile="/home/local/eda09/keren/projects/magical_place/magical/execution/results/Telescopic_Three_stage_flow/Telescopic_Three_stage_flow.pin",
-         ffile="/home/local/eda09/keren/projects/magical_place/magical/execution/results/Telescopic_Three_stage_flow/DataTest/Telescopic_Three_stage_flow/Telescopic_Three_stage_flow.result.final",
-         cfile="/home/local/eda09/keren/projects/magical_place/magical/execution/results/Telescopic_Three_stage_flow/Telescopic_Three_stage_flow.connection",
-         jfile="/home/local/eda09/keren/projects/magical_place/magical/execution/results/Telescopic_Three_stage_flow/device_type.json")
