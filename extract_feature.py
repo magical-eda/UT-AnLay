@@ -10,7 +10,7 @@ OTA2 = 'Telescopic_Three_stage_1'
 OTA3 = 'Core_test_flow'
 OTA4 = 'Core_FF'
 
-# Extract feature images
+# Extract raw feature images
 print("Extracting Features for OTA1:", OTA1)
 extract_place.main(benchmark_dir, path_to_json, OTA1)
 print("Extracting Features for OTA2:", OTA2)

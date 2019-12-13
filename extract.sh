@@ -5,5 +5,5 @@ rm ./benchmark/*.sp
 
 # Extract dataset to ./data
 echo "Begin feature image extraction."
-rm ./data/data.hdf5
+rm ./data/*
 python extract_feature.py
