@@ -3,7 +3,6 @@ import math
 from functools import partial
 import random
 import numpy as np
-import util.image_cordinate as img_trans
 import time
 
 
@@ -40,19 +39,17 @@ class Classifier(object):
             self.phase_train = tf.placeholder(tf.bool)
 
         with tf.variable_scope('nn', reuse=tf.AUTO_REUSE):
-            logits, embedding = self._network(self.x, self.phase_train, self._observation_dim, self._image_ch_dim, self._num_labels)
+            logits = self._network(self.x, self.phase_train, self._observation_dim, self._image_ch_dim, self._num_labels)
 
         with tf.variable_scope('loss'):
             cross_entropy = self.soft_max_cross_entropy(logits, self.y)
             self._loss = cross_entropy + self.l2_regularization(0.1)
 
         with tf.variable_scope('evaluate'):
-            self._correctness = tf.equal(
-                tf.argmax(logits, 1), tf.argmax(tf.one_hot(self.y, self._num_labels), 1))
-            self._accuracy = tf.reduce_mean(
-                tf.cast(self._correctness, tf.float32))
             predict = tf.argmax(logits, 1)
             actual =  tf.argmax(tf.one_hot(self.y, self._num_labels), 1)
+            self._correctness = tf.equal(predict, actual)
+            self._accuracy = tf.reduce_mean(tf.cast(self._correctness, tf.float32))
             self._tp = tf.cast(tf.count_nonzero(predict * actual), tf.float32)
             self._tn = tf.cast(tf.count_nonzero((predict - 1) * (actual - 1)), tf.float32)
             self._fp = tf.cast(tf.count_nonzero(predict * (actual - 1)), tf.float32)
@@ -82,7 +79,7 @@ class Classifier(object):
         self._merge =tf.summary.merge_all()
 
     def soft_max_cross_entropy(self, logits, labels):
-        return tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(logits=logits, labels=labels))
+        return tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(logits=logits, labels=tf.one_hot(labels, self._num_labels)))
 
     def l2_regularization(self, weight=0.2):
         vars = tf.trainable_variables()
@@ -102,10 +99,8 @@ class Classifier(object):
 
     def evaluate(self, X_data, y_data):
         num_examples = len(X_data)
-        tp = 0 
-        tn = 0
-        fp = 0
-        fn = 0
+        #acc = 0
+        tp,tn,fp,fn = 0,0,0,0
         for offset in range(0, num_examples, self._batch_size):
             batch_x, batch_y = X_data[offset:offset +
                                       self._batch_size], y_data[offset:offset+self._batch_size]
@@ -115,10 +110,14 @@ class Classifier(object):
             tn += tnb
             fp += fpb
             fn += fnb
-        acc = (tp+tn)/(tp+tn+fp+fn)
-        pre = tp/(tp+fp)
-        rec = tp/(tp+fn)
-        return acc, pre, rec
+        return tp, tn, fp, fn
+            #acc_b = self._sesh.run([self._accuracy], feed_dict={
+            #                          self.x: batch_x, self.y: batch_y, self.phase_train: False})
+            #acc = acc + acc_b[0] * self._batch_size
+        #acc = acc / num_examples
+        #pre = acc
+        #rec = acc
+        #return acc, pre, rec
 
     def reset_session(self):
         tf.reset_default_graph()

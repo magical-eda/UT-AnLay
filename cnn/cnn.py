@@ -12,12 +12,12 @@ def nofeat_2D(x, phase_train=True, obs_dim=841, input_ch=1, num_labels=2):
         conv4 = tf.layers.conv2d(conv3, 32, 5, padding='same',activation=tf.nn.relu)
         conv4 = tf.layers.max_pooling2d(conv4, 3, 2)
         fc1 = tf.contrib.layers.flatten(conv4)
-        fc1 = tf.layers.dense(fc1, 128, activation=tf.nn.relu)
-        fc2 = tf.layers.dense(fc1, 16, activation=tf.nn.relu) 
+        fc1 = tf.layers.dense(fc1, 128)
+        fc2 = tf.layers.dense(fc1, 16) 
         fc3 = tf.layers.dense(fc2, num_labels) 
     return fc3
 
-def nofeat_3D(x, phase_train=True, obs_dim=841, input_ch=1, num_labels=2):
+def feat_2D(x, phase_train=True, obs_dim=841, input_ch=1, num_labels=2):
     with tf.variable_scope("cnn"):
         conv1_temp = []
         for i in range(input_ch):
@@ -52,7 +52,7 @@ def nofeat_3D(x, phase_train=True, obs_dim=841, input_ch=1, num_labels=2):
         fc3 = tf.layers.dense(fc2, num_labels) 
     return fc3
 
-def cnn3_loc(x, phase_train=True, obs_dim=841, input_ch=1, num_labels=2):
+def feat_3D(x, phase_train=True, obs_dim=841, input_ch=1, num_labels=2):
     with tf.variable_scope("cnn"):
         conv1_temp = []
         for i in range(input_ch):
@@ -65,8 +65,8 @@ def cnn3_loc(x, phase_train=True, obs_dim=841, input_ch=1, num_labels=2):
         conv4 = tf.layers.conv3d(conv3, 32, (2,5,5), padding='same', activation=tf.nn.relu)
         conv4 = tf.layers.max_pooling3d(conv4, (1,3,3), (1,2,2))
         fc1 = tf.contrib.layers.flatten(conv4)
-        fc1 = tf.layers.dense(fc1, 128, activation=tf.nn.relu, activation=tf.nn.relu)
-        fc2 = tf.layers.dense(fc1, 16, activation=tf.nn.relu, activation=tf.nn.relu) 
+        fc1 = tf.layers.dense(fc1, 128, activation=tf.nn.relu)
+        fc2 = tf.layers.dense(fc1, 16, activation=tf.nn.relu)
         fc3 = tf.layers.dense(fc2, num_labels) 
     return fc3
 
