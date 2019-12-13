@@ -16,4 +16,4 @@ Layouts are labeled according to the rank percentile in the post layout performa
 During label, we assign the worst 25% performance labeled as positive. For a balanced dataset, the best 25% performance would be labeled as negative. For an imbalanced dataset, the rest 75% good performance would be labeled as positive. \
 The balanced OTA1 would be used for pretraining the model. The pretrained model would be then finetuned on the unbalanced datasets. 
 
-![label][./../images/label.pdf]
+![label][./../images/label.jpg]
