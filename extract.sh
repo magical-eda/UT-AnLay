@@ -7,3 +7,6 @@ rm ./benchmark/*.sp
 echo "Begin feature image extraction."
 rm ./data/*
 python extract_feature.py
+
+# Embed coordinate channels
+python prepare_dataset.py

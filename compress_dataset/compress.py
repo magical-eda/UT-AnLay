@@ -1,5 +1,5 @@
 ##
-# @file db.py
+# @file compress.py
 # @author Mingjie Liu
 # @date July 2019
 # @brief compress feature images to channel and label, save to hdf5 file format
@@ -108,10 +108,21 @@ class compress(object):
             files.append(path + "/bias.png")
             # Read images
             for j, fileName in enumerate(files):
-                image[:,:,j] = misc.imread(fileName, flatten=True, mode="L")
+                image[:,:,j] = misc.imread(fileName, flatten=True, mode="L") 
             self.images[index,:,:,:] = image
             index += 1
         assert index == N, "Read images not matched"
+    def embedCoord(self):
+    # Apply coordinate channel embeddings to every channel
+    # Resulting shape (N, 64, 64, 18)
+        print("Embedding coordinate channels")
+        N = len(self.labels)
+        self.images_coord = np.zeros((N, 64, 64, 18))
+        for i in tqdm(range(N)):
+            curr_img = self.images[i,:,:,:]
+            self.images_coord[i,:,:,0:18:3] = curr_img
+            self.images_coord[i,:,:,1:18:3] = cordinate_img_x(curr_img)
+            self.images_coord[i,:,:,2:18:3] = cordinate_img_y(curr_img)
     def saveData(self, hdf5):
         print("Saving to file", hdf5)
         f = h5py.File(hdf5, 'a')

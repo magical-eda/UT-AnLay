@@ -14,14 +14,15 @@ The benchmark currently contains 4 OTA examples:
 
 ## Performance Simulation ##
 More information on the circuits test bench are under ./Simulation.  \
-With each circuit layout implementation, the netlist first need to be extracted for parasitics and then simulated with the test bench.
-We currently rely on Calibre PEX for layout parasitic extraction:
-https://go.mentor.com/4ii9y
-We currently rely on Cadence Spectre for performance simulation, the ocean script files are under ./Simulation, which could be initiated with in the command line with:
+With each circuit layout implementation, the netlist first need to be extracted for parasitics and then simulated with the test bench. \
+We currently rely on Calibre PEX for layout parasitic extraction:  \
+https://go.mentor.com/4ii9y \
+We currently rely on Cadence Spectre for performance simulation, the ocean script files are under ./Simulation, which could be initiated with in the command line with:   
 ```
     ocean --replay ./Simulation/#Name_Of_Test#.ocn    
 ```
-Note that it is possible that other initializer files are needed to fully run the ocean simulation script.
+Note that it is possible that other initializer files are needed to fully run the ocean simulation script. \
+* This part still need time.
 
 
 ## Placement and peformance ##

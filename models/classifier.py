@@ -1,10 +1,6 @@
 import tensorflow as tf
 import math
-from functools import partial
-import random
 import numpy as np
-import time
-
 
 class Classifier(object):
     def __init__(self, batch_size, network,
@@ -87,40 +83,39 @@ class Classifier(object):
         return lossL2
     
     def update(self, x, y):
-        new_x = x
         if self._write_summary:
-            _, loss, summ = self._sesh.run([self._train, self._loss, self._merge], feed_dict={ self.x: new_x, self.y: y, self.phase_train: True})
+            _, loss, summ = self._sesh.run([self._train, self._loss, self._merge], feed_dict={ self.x: x, self.y: y, self.phase_train: True})
             self._train_writer.add_summary(summ, self._step)
         else:
             _, loss = self._sesh.run([self._train, self._loss], feed_dict={
-                                     self.x: new_x, self.y: y, self.phase_train: True})
+                                     self.x: x, self.y: y, self.phase_train: True})
         self._step += 1
         return loss
 
     def evaluate(self, X_data, y_data):
         num_examples = len(X_data)
-        #acc = 0
         tp,tn,fp,fn = 0,0,0,0
         for offset in range(0, num_examples, self._batch_size):
-            batch_x, batch_y = X_data[offset:offset +
-                                      self._batch_size], y_data[offset:offset+self._batch_size]
-            tpb,tnb,fpb,fnb = self._sesh.run([self._tp, self._tn, self._fp, self._fn], feed_dict={
-                                      self.x: batch_x, self.y: batch_y, self.phase_train: False})
+            batch_x, batch_y = X_data[offset:offset+self._batch_size], y_data[offset:offset+self._batch_size]
+            tpb,tnb,fpb,fnb = self._sesh.run([self._tp, self._tn, self._fp, self._fn], feed_dict={self.x: batch_x, self.y: batch_y, self.phase_train: False})
             tp += tpb
             tn += tnb
             fp += fpb
             fn += fnb
         return tp, tn, fp, fn
-            #acc_b = self._sesh.run([self._accuracy], feed_dict={
-            #                          self.x: batch_x, self.y: batch_y, self.phase_train: False})
-            #acc = acc + acc_b[0] * self._batch_size
-        #acc = acc / num_examples
-        #pre = acc
-        #rec = acc
-        #return acc, pre, rec
 
     def reset_session(self):
         tf.reset_default_graph()
+
+    def save_weights(self, path):
+        print("Save weights to ", path)
+        saver = tf.train.Saver()
+        saver.save(self._sesh, path)
+    
+    def load_weights(self, path):
+        print("Load weights from ", path)
+        saver = tf.train.Saver()
+        saver.restore(self._sesh, path)
 
     def done(self):
         self._train_writer.close()
