@@ -4,6 +4,7 @@
 Mingjie Liu<sup>*</sup>, Keren Zhu<sup>*</sup>, Jiaqi Gu, Linxiao Shen, Xiyuan Tang, Nan Sun, David Z. Pan \
 2020 Design, Automation Test in Europe Conference Exhibition (DATE)
 
+![pre_ext](./images/pre_ext.jpg)
 ![CNN](./images/3DCNN.jpg)
 
 ### Requirements ###
