@@ -5,7 +5,7 @@ Run the script under UT-Anlay to extract the benchmark
     source extract.sh 
 ```
 ## Designs ##
-More information on the circuits netlist files are under ./Netlists. \
+More information on the circuits netlist files are under [Netlists](./Netlists). \
 The benchmark currently contains 4 OTA examples:
 - Telescopic_Three_stage
 - Telescopic_Three_stage_1
@@ -22,11 +22,12 @@ We currently rely on Cadence Spectre for performance simulation, the ocean scrip
     ocean --replay ./Simulation/#Name_Of_Test#.ocn    
 ```
 Note that it is possible that other initializer files are needed to fully run the ocean simulation script. \
-* This part still need time.
+
+> * This part needs further updates.
 
 
 ## Placement and peformance ##
-For each layout implementation, as an example under ./Core_FF/Core_FF_0/ contains the respective performance results.
+For each layout implementation, as an example under [Core_FF](./Core_FF/Coer_FF_0) contains the respective performance results.
 ### Performance ###
 - performance.txt: post layout simulation results
 ### Placement Solution ###
@@ -62,4 +63,4 @@ DeviceName OriginX OriginY Width Height
 The layout generation based on MAGICAL (https://github.com/magical-eda/MAGICAL). The analytical placement engine optimizes weighted wire-length and area, while also enforcing symmetry constraints. Different netweighting would lead to different placement solutions and post layout performance results.
 
 ## Feature extraction ##
-More information on the json files needed for feature extraction is under ./JsonFile.
+More information on the json files needed for feature extraction is under [JsonFile](./JsonFile).

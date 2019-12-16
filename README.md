@@ -4,6 +4,7 @@
 Mingjie Liu<sup>*</sup>, Keren Zhu<sup>*</sup>, Jiaqi Gu, Linxiao Shen, Xiyuan Tang, Nan Sun, David Z. Pan \
 2020 Design, Automation Test in Europe Conference Exhibition (DATE)
 
+![CNN](./images/3DCNN.jpg)
 
 ### Requirements ###
 This code has been tested under Python 2.7.13. Please install the dependancies first:
