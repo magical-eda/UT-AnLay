@@ -7,7 +7,7 @@ from util import metric
 import argparse
 
 parser = argparse.ArgumentParser(description='Placement quality prediction training.')
-parser.add_argument('--design', help="Select cnn model using 3D convolution. Default is 2D.", default='OTA1', type=str)
+parser.add_argument('--design', help="Select design. Default is OTA1.", default='OTA1', type=str)
 parser.add_argument('--balance', nargs='?', help="Balanced dataset. Default is False.", const=True, default=False)
 parser.add_argument('--D3', nargs='?', help="Select cnn model using 3D convolution. Default is 2D.", const=True, default=False)
 parser.add_argument('--nofeat', nargs='?', help='Select whether to embed features. Default is embedded feature.', const=True, default=False)
