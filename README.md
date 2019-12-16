@@ -16,7 +16,7 @@ pip install -r requirements.txt
 Layouts are generated with [MAGICAL](https://github.com/magical-eda/MAGICAL). \
 The analytical analog placement optimizes the weighted wirelength and layout area. 
 Different net weighting would result in different placement solutions and post layout performance results. \
-For more information on the circuits and layout generation go under [benchmarks](./benchmarks).
+For more information on the circuits and layout generation go under [benchmark](./benchmark).
 
 ### Placement Feature Extraction ###
 Placement results are represented into 2D images and device type and locations are embedded into different image channels according to the circuit topology.

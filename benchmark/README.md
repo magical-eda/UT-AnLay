@@ -27,7 +27,7 @@ Note that it is possible that other initializer files are needed to fully run th
 
 
 ## Placement and peformance ##
-For each layout implementation, as an example under [Core_FF](./Core_FF/Coer_FF_0) contains the respective performance results.
+For each layout implementation, as an example under ./Core_FF/Coer_FF_0 contains the respective performance results.
 ### Performance ###
 - performance.txt: post layout simulation results
 ### Placement Solution ###
